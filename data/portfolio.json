@@ -1,0 +1,110 @@
+{
+  "name": "Chittadeep",
+  "headerTaglineOne": "Hello 👋",
+  "headerTaglineTwo": "I'm Chittadeep - curious",
+  "headerTaglineThree": "developer and engineer",
+  "headerTaglineFour": " based in Kolkata, India.",
+  "showBlog": false,
+  "darkMode": true,
+  "socials": [
+    {
+      "id": "1",
+      "title": "Github",
+      "link": "https://github.com/chittadeep"
+    },
+    {
+      "id": "2",
+      "title": "LinkedIn",
+      "link": "https://www.linkedin.com/in/chittadeep/"
+    },
+    { "id": "5", "title": "Email", "link": "mailto:mailchittadeep@gmail.com" }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "title": "Mafatih Ul Jinan",
+      "description": "App Development",
+      "imageSrc": "https://play-lh.googleusercontent.com/jozURWe1UvmFiGFlazdCPlKS0dqE-ddMz8eXrRy_5QoHFAeHHEetFJeIMdXeENFtZUG-=s48",
+      "url": "https://play.google.com/store/apps/details?id=com.mafatihuljinan.org&hl=en_IN"
+    },
+    {
+      "id": "2",
+      "title": "Emergo Stat",
+      "description": "Flutter App Development",
+      "imageSrc": "https://play-lh.googleusercontent.com/SYdQskid2mWt_AuTrY-nk9PE0H6of7I_EUvdieaqXPBnZTcC8Th0jlrmuF9bJZDE2aE=w240-h480",
+      "url": "https://play.google.com/store/apps/details?id=com.messaging.ibapp&hl=en_IN"
+    },
+    {
+      "id": "3",
+      "title": "SOOOM.net",
+      "description": "Flutter App Development",
+      "imageSrc": "https://play-lh.googleusercontent.com/m0zl-Y6wlleWbcECyX9AlL7Hc8fb02CRtwmcKdlFIVrBdNYuUUPTIrYZRD6e_9m1vA=w240-h480",
+      "url": "https://play.google.com/store/apps/details?id=com.itdivers.sooom&hl=en_IN"
+    },
+    {
+      "id": "4",
+      "title": "Good channel",
+      "description": "Flutter App Development",
+      "imageSrc": "https://images.unsplash.com/photo-1492171983775-a51717616c0d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8NjB8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
+      "url": "http://chetanverma.com/"
+    },
+    {
+      "id": "5",
+      "title": "Project Five",
+      "description": "Flutter App Development",
+      "imageSrc": "https://images.unsplash.com/photo-1534239143101-1b1c627395c5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8NzZ8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
+      "url": "http://chetanverma.com/"
+    },
+    {
+      "id": "6",
+      "title": "Project Six",
+      "description": "Flutter App Development",
+      "imageSrc": "https://images.unsplash.com/photo-1517479149777-5f3b1511d5ad?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTAyfHxwYXN0ZWx8ZW58MHx8MHw%3D&auto=format&fit=crop&w=400&q=60",
+      "url": "http://chetanverma.com/"
+    }
+  ],
+  "services": [
+    {
+      "id": "1",
+      "title": "App Development",
+      "description": "I help with the creation and development of IOS and Android apps."
+    },
+    {
+      "id": "2",
+      "title": "Backend Development",
+      "description": "I develop backends using Spring Boot and Nest JS."
+    }
+  ],
+  "aboutpara": "Experienced Software Engineer specializing in developing cross-platform mobile applications with Flutter. Proven ability to deliver robust, production-ready apps complemented by a strong awareness of backend development with Spring Boot. Recognized for a rapid learning agility and applying new technologies to meet evolving industry demands and build comprehensive, scalable solutions.",
+  "resume": {
+    "tagline": "👋  I'm a software engineer, product designer, and maker.",
+    "description": "I have delivered world-class user experiences to millions of people. Well-versed with React, Javascript, and most of the Web frameworks.",
+    "experiences": [
+      {
+        "id": "1",
+        "dates": "March 2022 - Present",
+        "type": "Full Time",
+        "position": "Frontend Engineer at X",
+        "bullets": [
+          "Worked on the frontend of a React application",
+          "Worked on the frontend of a React application"
+        ]
+      },
+      {
+        "id": "2",
+        "dates": "March 2020 - March 2022",
+        "type": "Full Time",
+        "position": "Frontend Engineer at X",
+        "bullets": ["Worked on the frontend of a React application"]
+      }
+    ],
+    "education": {
+      "universityName": "University X",
+      "universityDate": "2016-2020",
+      "universityPara": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
+    },
+    "languages": ["Javascript", "HTML5", "CSS", "Python"],
+    "frameworks": ["React", "Typescript", "NodeJs"],
+    "others": ["Figma", "AdobeXD", "AWS"]
+  }
+}
