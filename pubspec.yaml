@@ -1,0 +1,33 @@
+name: flutter_portfolio_site
+description: A clean, responsive portfolio website built with Flutter.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # State Management for MVVM
+  provider: ^6.0.5
+  
+  # For responsive layout and easy section scrolling/navigation
+  scrollable_positioned_list: ^0.3.8
+  
+  # Aesthetic font similar to the design
+  google_fonts: ^6.1.0 
+  url_launcher: ^6.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
+  # Add assets here if you were including local images, e.g., for the profile picture
+  # assets:
+  #   - assets/images/
