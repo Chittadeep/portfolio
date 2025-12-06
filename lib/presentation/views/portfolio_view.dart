@@ -35,7 +35,7 @@ class PortfolioView extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(100.0),
-        child: _NavBar(isDesktop: isDesktop),
+        child: _NavBar(isDesktop: isDesktop, isMobile: isMobile),
       ),
       drawer: isMobile ? const _MobileDrawer() : null,
       body: Stack(
@@ -258,7 +258,7 @@ class PortfolioView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildSectionTitle('03', "Some Things I've Build"),
-          ...projects.map((project) => _ProjectCard(project: project, isDesktop: isDesktop)).toList(),
+          ...projects.map((project) => _ProjectCard(project: project, isDesktop: isDesktop)),
           const SizedBox(height: 100),
         ],
       ),
@@ -308,64 +308,64 @@ class PortfolioView extends StatelessWidget {
 
 class _NavBar extends StatelessWidget {
   final bool isDesktop;
-  const _NavBar({required this.isDesktop});
+  final bool isMobile;
+  const _NavBar({required this.isDesktop, required this.isMobile});
 
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<PortfolioViewModel>(context);
+
+    final logo = Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.primaryGreen, width: 2),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: const Text(
+        'CB',
+        style: TextStyle(
+          color: AppColors.primaryGreen,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+
+    final hamburger = IconButton(
+      icon: const Icon(Icons.menu, color: AppColors.primaryGreen),
+      onPressed: () {
+        Scaffold.of(context).openDrawer();
+      },
+    );
+
+    final navItems = Row(
+      children: [
+        ...viewModel.sections.asMap().entries.map((entry) {
+          int index = entry.key;
+          String text = entry.value;
+          return _NavItem(
+            number: '0${index}.',
+            title: text,
+            isActive: index == viewModel.activeSectionIndex,
+            onTap: () => viewModel.scrollToSection(index),
+          );
+        }),
+        const SizedBox(width: 20),
+        _CustomButton(
+          text: 'Contact',
+          onPressed: () => viewModel.scrollToSection(4), // Contact is index 4
+        ),
+      ],
+    );
     
     return Container(
-      color: AppColors.backgroundDark.withOpacity(0.95), // Semi-transparent effect
+      color: AppColors.backgroundDark.withAlpha(242), // Semi-transparent effect
       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Logo (CB)
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              border: Border.all(color: AppColors.primaryGreen, width: 2),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: const Text(
-              'CB',
-              style: TextStyle(
-                color: AppColors.primaryGreen,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          
-          if (isDesktop)
-            Row(
-              children: [
-                ...viewModel.sections.asMap().entries.map((entry) {
-                  int index = entry.key;
-                  String text = entry.value;
-                  return _NavItem(
-                    number: '0${index}.',
-                    title: text,
-                    isActive: index == viewModel.activeSectionIndex,
-                    onTap: () => viewModel.scrollToSection(index),
-                  );
-                }).toList(),
-                const SizedBox(width: 20),
-                _CustomButton(
-                  text: 'Contact',
-                  onPressed: () => viewModel.scrollToSection(4), // Contact is index 4
-                ),
-              ],
-            )
-          else
-            // Mobile: Hamburger menu (simplified)
-            IconButton(
-              icon: const Icon(Icons.menu, color: AppColors.primaryGreen),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            ),
-        ],
+        children: isDesktop 
+          ? [logo, navItems] 
+          : (isMobile ? [hamburger, logo] : [logo, hamburger]),
       ),
     );
   }
@@ -478,7 +478,7 @@ class _SocialIcon extends StatelessWidget {
     return IconButton(
       icon: Icon(icon, size: 20, color: AppColors.textGray),
       onPressed: onPressed,
-      hoverColor: AppColors.primaryGreen.withOpacity(0.1),
+      hoverColor: AppColors.primaryGreen.withAlpha(26),
     );
   }
 }
@@ -548,7 +548,7 @@ class _MobileDrawer extends StatelessWidget {
                 Navigator.of(context).pop(); // Close the drawer
               },
             );
-          }).toList(),
+          }),
           const SizedBox(height: 20),
           _CustomButton(
             text: 'Contact',
@@ -566,7 +566,7 @@ class _MobileDrawer extends StatelessWidget {
 
 class _ProfilePicture extends StatelessWidget {
   final double size;
-  const _ProfilePicture({super.key, this.size = 300.0});
+  const _ProfilePicture({this.size = 300.0});
 
   @override
   Widget build(BuildContext context) {
