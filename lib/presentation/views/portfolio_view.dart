@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio_site/core/app_config.dart';
 import 'package:flutter_portfolio_site/presentation/viewmodels/portfolio_viewmodel.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -32,7 +34,7 @@ class PortfolioView extends StatelessWidget {
     // A single-page application using ScrollablePositionedList for smooth section navigation
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60.0),
+        preferredSize: const Size.fromHeight(100.0),
         child: _NavBar(isDesktop: isDesktop),
       ),
       body: Stack(
@@ -180,8 +182,8 @@ class PortfolioView extends StatelessWidget {
                 spacing: 40,
                 runSpacing: 10,
                 children: [
-                  ...['Flutter', 'React', 'NextJS'].map((e) => _buildSkillItem(e)),
-                  ...['Firebase', 'Java Spring-Boot'].map((e) => _buildSkillItem(e)),
+                  ...['Flutter', 'Spring Boot', 'Data Structures and Algorithms', 'SQL'].map((e) => _buildSkillItem(e)),
+                  
                 ],
               ),
             ],
@@ -189,7 +191,7 @@ class PortfolioView extends StatelessWidget {
         ),
         const Expanded(
           flex: 2,
-          child: Center(child: _ProfilePicture()),
+          child: Center(child: _ProfilePicture(size: 300.0)),
         ),
       ],
     );
@@ -199,7 +201,7 @@ class PortfolioView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Center(child: _ProfilePicture()),
+        const Center(child: _ProfilePicture(size: 200.0)),
         const SizedBox(height: 40),
         const Text(
           "Hello! My name is Chittadeep and I enjoy creating things that live on the internet...",
@@ -215,7 +217,7 @@ class PortfolioView extends StatelessWidget {
           spacing: 20,
           runSpacing: 10,
           children: [
-            ...['Flutter', 'Java Spring Boot', 'React NextJS', 'Firebase'].map((e) => _buildSkillItem(e)),
+            ...['Flutter', 'Spring Boot', 'Data Structures and Algorithms', 'SQL'].map((e) => _buildSkillItem(e)),
           ],
         ),
       ],
@@ -317,7 +319,7 @@ class _NavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Logo (J)
+          // Logo (CB)
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
@@ -325,7 +327,7 @@ class _NavBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
             ),
             child: const Text(
-              'J',
+              'CB',
               style: TextStyle(
                 color: AppColors.primaryGreen,
                 fontSize: 20,
@@ -442,11 +444,15 @@ class _LeftSocialSidebar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           // Social Icons (using placeholders)
-          _SocialIcon(icon: Icons.favorite, onPressed: () {}),
-          _SocialIcon(icon: Icons.camera_alt, onPressed: () {}),
-          _SocialIcon(icon: Icons.tag_faces, onPressed: () {}),
-          _SocialIcon(icon: Icons.link, onPressed: () {}),
-          _SocialIcon(icon: Icons.code, onPressed: () {}),
+          _SocialIcon(icon: EvaIcons.github_outline, onPressed: () {
+            launchUrlString('https://github.com/chittadeep');
+          }),
+          _SocialIcon(icon: FontAwesomeIcons.instagram, onPressed: () {
+            launchUrlString('https://www.instagram.com/chittadeep_biswas01/');
+          }),
+          _SocialIcon(icon: EvaIcons.linkedin_outline, onPressed: () {
+            launchUrlString('https://in.linkedin.com/in/chittadeep-biswas');
+          }),
           const SizedBox(height: 20),
           // Vertical Divider line
           Container(
@@ -517,22 +523,23 @@ class _RightEmailSidebar extends StatelessWidget {
 }
 
 class _ProfilePicture extends StatelessWidget {
-  const _ProfilePicture();
+  final double size;
+  const _ProfilePicture({super.key, this.size = 300.0});
 
   @override
   Widget build(BuildContext context) {
     // Mimics the photo frame design from the screenshot
     return Container(
       margin: const EdgeInsets.all(20),
-      width: 300,
-      height: 300,
+      width: size,
+      height: size,
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.primaryGreen, width: 2),
         borderRadius: BorderRadius.circular(4),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4),
-        child: ColorFiltered(
+        child: /*ColorFiltered(
           colorFilter: const ColorFilter.mode(
             AppColors.primaryGreen,
             BlendMode.screen,
@@ -547,8 +554,9 @@ class _ProfilePicture extends StatelessWidget {
               ),
             ),
           ),
-        ),
-      ),
+        ),*/
+        Image.asset('assets/profile.png')
+        )
     );
   }
 }
@@ -678,97 +686,86 @@ class _ProjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 40.0),
-      child: isDesktop ? _desktopLayout() : _mobileLayout(),
+      child: isDesktop ? _desktopLayout(context) : _mobileLayout(),
     );
   }
 
-  Widget _desktopLayout() {
-    // Project image on the right, text overlay on the left (mirrored layout)
-    final bool isRightAligned = project.title == 'Flutter ECommerce'; 
+  Widget _buildProjectText() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment:
+          CrossAxisAlignment.start,
+      children: [
+        Text(
+          project.subtitle,
+          style: const TextStyle(color: AppColors.primaryGreen, fontSize: 14),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          project.title,
+          style: const TextStyle(
+              color: AppColors.textLight,
+              fontSize: 28,
+              fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 15),
+        Text(
+          project.description,
+          style: const TextStyle(color: AppColors.textGray, fontSize: 16),
+          textAlign: TextAlign.left,
+        ),
+        const SizedBox(height: 10),
+        Text(
+          project.techStack.join(' • '),
+          style: const TextStyle(color: AppColors.textGray, fontSize: 14),
+        ),
+        const SizedBox(height: 10),
+        GestureDetector(
+            onTap: () => launchUrlString(project.liveUrl),
+            child: const Icon(Icons.link, color: AppColors.textGray, size: 20)),
+      ],
+    );
+  }
+
+  Widget _buildProjectImage(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: Image.network(
+        project.imageUrl,
+        height: 128,
+        width: 128,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => Container(
+          height: 128,
+          width: 128,
+          color: AppColors.secondaryDark,
+          child: Center(
+              child: Text(project.imageUrl,
+                  style: const TextStyle(color: AppColors.primaryGreen))),
+        ),
+      ),
+    );
+  }
+
+  Widget _desktopLayout(BuildContext context) {
+
+    final Widget imageWidget = Expanded(
+      flex: 0,
+      child: _buildProjectImage(context),
+    );
+
+    final Widget textWidget = Expanded(
+        flex: 9,
+        child: Container(
+          alignment:
+              Alignment.centerLeft ,
+          child: _buildProjectText(),
+        ));
 
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (isRightAligned) const Spacer(flex: 1),
-        Expanded(
-          flex: 5,
-          child: Stack(
-            children: [
-              // Image container
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  project.imageUrl,
-                  height: 300,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  opacity: const AlwaysStoppedAnimation(0.3), // Darken the image
-                  errorBuilder: (context, error, stackTrace) => Container(
-                    height: 300,
-                    color: AppColors.secondaryDark,
-                    child: Center(child: Text(project.imageUrl.split('=').last, style: const TextStyle(color: AppColors.primaryGreen))),
-                  ),
-                ),
-              ),
-              
-              // Text Content Overlay
-              Positioned.fill(
-                child: Align(
-                  alignment: isRightAligned ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Container(
-                    padding: const EdgeInsets.all(24),
-                    constraints: const BoxConstraints(maxWidth: 400),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: isRightAligned ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          project.subtitle,
-                          style: const TextStyle(color: AppColors.primaryGreen, fontSize: 14),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          project.title,
-                          style: const TextStyle(color: AppColors.textLight, fontSize: 28, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 15),
-                        // Description box to mimic the design overlay
-                        Container(
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: AppColors.secondaryDark,
-                            borderRadius: BorderRadius.circular(4),
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.backgroundDark.withOpacity(0.5),
-                                blurRadius: 10,
-                              ),
-                            ]
-                          ),
-                          child: Text(
-                            project.description,
-                            style: const TextStyle(color: AppColors.textGray, fontSize: 16),
-                            textAlign: isRightAligned ? TextAlign.right : TextAlign.left,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        // Tech Stack
-                        Text(
-                          project.techStack.join(' • '),
-                          style: const TextStyle(color: AppColors.textGray, fontSize: 14),
-                        ),
-                        const SizedBox(height: 10),
-                        const Icon(Icons.link, color: AppColors.textGray, size: 20),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        if (!isRightAligned) const Spacer(flex: 1),
-      ],
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: 
+          [imageWidget, const SizedBox(width: 20), textWidget],
     );
   }
 
@@ -784,7 +781,10 @@ class _ProjectCard extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           project.title,
-          style: const TextStyle(color: AppColors.textLight, fontSize: 24, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+              color: AppColors.textLight,
+              fontSize: 24,
+              fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 15),
         // Image
@@ -797,7 +797,10 @@ class _ProjectCard extends StatelessWidget {
               height: 200,
               width: double.infinity,
               color: AppColors.secondaryDark,
-              child: Center(child: Text(project.imageUrl.split('=').last, style: const TextStyle(color: AppColors.primaryGreen))),
+              child: Center(
+                  child: Text(project.imageUrl.split('=').last,
+                      style:
+                          const TextStyle(color: AppColors.primaryGreen))),
             ),
           ),
         ),
@@ -814,7 +817,9 @@ class _ProjectCard extends StatelessWidget {
           style: const TextStyle(color: AppColors.textGray, fontSize: 14),
         ),
         const SizedBox(height: 10),
-        const Icon(Icons.link, color: AppColors.textGray, size: 20),
+        GestureDetector(
+            onTap: () => launchUrlString(project.liveUrl),
+            child: const Icon(Icons.link, color: AppColors.textGray, size: 20)),
       ],
     );
   }
