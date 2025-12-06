@@ -41,6 +41,7 @@ class ProjectModel {
   final String subtitle;
   final String description;
   final List<String> techStack;
+  final String liveUrl;
   final String imageUrl; // Mock image URL
 
   ProjectModel({
@@ -48,6 +49,7 @@ class ProjectModel {
     required this.subtitle,
     required this.description,
     required this.techStack,
+    required this.liveUrl,
     required this.imageUrl,
   });
 }
@@ -79,18 +81,44 @@ class PortfolioRepository {
 
   static List<ProjectModel> get projectList => [
     ProjectModel(
-      title: 'Mafa',
+      title: 'Mafatih Ul Jinan',
       subtitle: 'Featured Project',
       description: 'Mafatih Ul Jinan ( Keys to Heavens ), multiple languages: Arabic, English, Gujarati, and Francais. 14 Masoomeen Daily Dua Salat And Ziyarat Event Aamaal Listen and Reading Daily Dua in your Pocket Never Forget Dua Salat And Ziyarat and Event Aamaal One-Click Google Login: Get started in seconds. No need to remember another password—just sign in with your Google account or Apple Account.',
       techStack: ['Riverpod', 'Realm', 'Isolates'],
+      liveUrl: 'https://play.google.com/store/apps/details?id=com.mafatihuljinan.org&hl=en',
       imageUrl: 'https://play-lh.googleusercontent.com/jozURWe1UvmFiGFlazdCPlKS0dqE-ddMz8eXrRy_5QoHFAeHHEetFJeIMdXeENFtZUG-=s96-rw',
     ),
     ProjectModel(
-      title: 'Flutter ECommerce',
-      subtitle: 'Featured Project',
-      description: 'E-Commerce UI kit can be used for e-commerce applications in android and ios devices...',
-      techStack: ['Dart', 'Android', 'iOS'],
-      imageUrl: 'https://placehold.co/1200x600/112240/64FFDA?text=ECommerce+UI+Preview',
+      title: 'SOOOM.net',
+      subtitle: 'E-Commerce',
+      description: 'Find the spare part that suits you on the SOOOM.net platform',
+      techStack: ['Provider', 'REST API', 'MVC'],
+      liveUrl: 'https://play.google.com/store/apps/details?id=com.itdivers.sooom&hl=en',
+      imageUrl: 'https://play-lh.googleusercontent.com/m0zl-Y6wlleWbcECyX9AlL7Hc8fb02CRtwmcKdlFIVrBdNYuUUPTIrYZRD6e_9m1vA=w480-h960-rw',
+    ),
+    ProjectModel(
+      title: 'Stepwhere',
+      subtitle: 'E-Commerce',
+      description: 'GPS tracking solutions in the form of smart shoes',
+      techStack: ['MobX', 'Dio'],
+      liveUrl: 'https://play.google.com/store/apps/details?id=com.stepwhere&hl=en',
+      imageUrl: 'https://play-lh.googleusercontent.com/9Ov6feDeyxsx5lGDoctEjpe-K05f6m2rQCoRmIKvBSGBCUI16dDxltaAIRf7CvmMK3U=w480-h960-rw',
+    ),
+    ProjectModel(
+      title: 'Yaad Plug',
+      subtitle: 'E-Commerce',
+      description: 'YaadPlug is a logistics and shipping company specializing in transporting parcels and packages from the USA to Jamaica.',
+      techStack: ['GetX', 'RetroFit', 'MVVM'],
+      liveUrl: 'https://apps.apple.com/us/app/yaadplug-lcs/id6749933885',
+      imageUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/53/2c/5b/532c5b7a-61e9-5cdd-42a2-23b4491bf122/AppIcon-1x_U007emarketing-0-11-0-85-220-0.png/400x400ia-75.webp',
+    ),
+    ProjectModel(
+      title: 'Good Channel',
+      subtitle: 'Entertainment',
+      description: 'GoodChannel is one of the simplest and most reliable media players available. Built with ease of use in mind, it allows you to securely log in, browse categories, and enjoy a smooth playback experience on your device.',
+      techStack: ['Provider', 'Dio'],
+      liveUrl: 'https://apps.apple.com/us/app/good-channel/id6746419594',
+      imageUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/84/99/1b/84991b89-ef98-c62a-30a8-1d549c592b44/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/400x400ia-75.webp',
     ),
   ];
 }
