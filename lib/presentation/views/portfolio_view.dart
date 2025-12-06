@@ -37,6 +37,7 @@ class PortfolioView extends StatelessWidget {
         preferredSize: const Size.fromHeight(100.0),
         child: _NavBar(isDesktop: isDesktop),
       ),
+      drawer: isMobile ? const _MobileDrawer() : null,
       body: Stack(
         children: [
           // 1. Main Content - ScrollablePositionedList handles all sections
@@ -361,7 +362,7 @@ class _NavBar extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.menu, color: AppColors.primaryGreen),
               onPressed: () {
-                // TODO: Implement mobile drawer/menu
+                Scaffold.of(context).openDrawer();
               },
             ),
         ],
@@ -521,6 +522,47 @@ class _RightEmailSidebar extends StatelessWidget {
     );
   }
 }
+
+class _MobileDrawer extends StatelessWidget {
+  const _MobileDrawer();
+
+  @override
+  Widget build(BuildContext context) {
+    final viewModel = Provider.of<PortfolioViewModel>(context, listen: false);
+    return Drawer(
+      backgroundColor: AppColors.backgroundDark,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ...viewModel.sections.asMap().entries.map((entry) {
+            int index = entry.key;
+            String text = entry.value;
+            return ListTile(
+              title: Text(
+                text,
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: AppColors.textLight, fontSize: 18),
+              ),
+              onTap: () {
+                viewModel.scrollToSection(index);
+                Navigator.of(context).pop(); // Close the drawer
+              },
+            );
+          }).toList(),
+          const SizedBox(height: 20),
+          _CustomButton(
+            text: 'Contact',
+            onPressed: () {
+              viewModel.scrollToSection(4);
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 
 class _ProfilePicture extends StatelessWidget {
   final double size;
