@@ -728,7 +728,7 @@ class _ProjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 40.0),
-      child: isDesktop ? _desktopLayout(context) : _mobileLayout(),
+      child: isDesktop ? _desktopLayout(context) : _mobileLayout(context),
     );
   }
 
@@ -811,7 +811,7 @@ class _ProjectCard extends StatelessWidget {
     );
   }
 
-  Widget _mobileLayout() {
+  Widget _mobileLayout(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -833,6 +833,8 @@ class _ProjectCard extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Image.network(
+            height: MediaQuery.of(context).size.width*0.4,
+            width: MediaQuery.of(context).size.width*0.4,
             project.imageUrl,
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) => Container(
